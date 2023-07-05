@@ -25,16 +25,24 @@ export default function Home() {
     setPrice(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle form submission, e.g., send data to backend
-    console.log('Product Name:', productName);
-    console.log('Quantity:', quantity);
-    console.log('Price:', price);
-    // Reset form fields
-    setProductName('');
-    setQuantity('');
-    setPrice('');
+
+  try{
+  const response = await fetch('api/product',{
+    method:'POST',
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify(productName, price,quantity)
+  });
+  if(response.ok) console.log("Product added successfully");
+
+  else console.log("error while adding product")
+  }
+  catch(error){
+          console.log(error);
+  }
   };
 
 
@@ -59,7 +67,7 @@ export default function Home() {
     setSelectedCategory('');
   };
   return (
-    <div>
+    <div className="px-6">
      <Navbar/>
      {/* displaying current stockmanage */}
      <div className="container mx-auto">
@@ -96,16 +104,18 @@ export default function Home() {
           </button>
         </form>
       </div>
-     <h1 className="text-3xl font-bold mb-6">Add Product</h1>
 
-<form onSubmit={handleSubmit} className="max-w-md">
+      {/*---------------------- add product--------------------------------- */}
+     <h1 className="text-3xl font-bold mb-6 flex justify-center items-center">Add Product</h1>
+
+<form onSubmit={handleSubmit} className=" flex justify-center items-center">
   <div className="mb-4">
     <label htmlFor="productName" className="block text-sm font-medium text-gray-700">
-      Product Name
+      Product slug
     </label>
     <input
       type="text"
-      id="productName"
+      name="productName"
       value={productName}
       onChange={handleProductNameChange}
       className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -118,7 +128,7 @@ export default function Home() {
     </label>
     <input
       type="number"
-      id="quantity"
+    name="quantity"
       value={quantity}
       onChange={handleQuantityChange}
       className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -131,7 +141,7 @@ export default function Home() {
     </label>
     <input
       type="number"
-      id="price"
+      name="price"
       value={price}
       onChange={handlePriceChange}
       className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
