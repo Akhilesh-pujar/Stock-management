@@ -32,9 +32,10 @@ export default function Home() {
   const response = await fetch('api/product',{
     method:'POST',
     headers:{
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+     
     },
-    body:JSON.stringify(productName, price,quantity)
+    body:JSON.stringify({productName, price,quantity})
   });
   if(response.ok) console.log("Product added successfully");
 
@@ -110,7 +111,7 @@ export default function Home() {
 
 <form onSubmit={handleSubmit} className=" flex justify-center items-center">
   <div className="mb-4">
-    <label htmlFor="productName" className="block text-sm font-medium text-gray-700">
+    <label className="block text-sm font-medium text-gray-700">
       Product slug
     </label>
     <input
@@ -123,7 +124,7 @@ export default function Home() {
   </div>
 
   <div className="mb-4">
-    <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+    <label  className="block text-sm font-medium text-gray-700">
       Quantity
     </label>
     <input
@@ -136,7 +137,7 @@ export default function Home() {
   </div>
 
   <div className="mb-4">
-    <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+    <label  className="block text-sm font-medium text-gray-700">
       Price
     </label>
     <input
