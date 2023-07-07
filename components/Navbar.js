@@ -2,8 +2,8 @@ import React from 'react'
 
 function Navbar() {
   return (
-    <header className="text-black body-font bg-indigo-400">
-    <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <header className=" container mx-auto text-black body-font bg-indigo-400">
+    <div className=" flex flex-wrap p-5 flex-col md:flex-row items-center">
       
       <span className="ml-3 font-bold text-xl">Stock Management System</span>
       <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
